@@ -5,7 +5,7 @@ module SolidusSignifyd
     def attributes(*args)
       hash = {}
       hash['deliveryAddress'] = address
-      hash['fullName'] = object.full_name
+      hash[SolidusSignifyd::Name.name_key] = SolidusSignifyd::Name.name_value(object)
       hash
     end
   end

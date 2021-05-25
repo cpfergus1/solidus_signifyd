@@ -15,8 +15,17 @@ module SolidusSignifyd
         order.payments.last.update(avs_response: "M", cvv_response_code: "M")
       end
 
-      it 'matches the SIGNIFYD V2 api' do
-        expect(serialized_order).to match_schema('v2/case.json')
+      if SolidusSupport.combined_first_and_last_name_in_address?
+
+        it 'matches the SIGNIFYD V3 api' do
+          expect(serialized_order).to match_schema('v3/case.json')
+        end
+
+      else
+
+        it 'matches the SIGNIFYD V2 api' do
+          expect(serialized_order).to match_schema('v2/case.json')
+        end
       end
     end
 
